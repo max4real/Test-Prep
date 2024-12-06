@@ -19,12 +19,6 @@ class HomeController extends GetxController {
     initLoad();
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
   void initLoad() {
     dataController.saveState(isFirstTime: false);
     fetchUserData();

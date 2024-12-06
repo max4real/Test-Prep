@@ -20,10 +20,3 @@ class OnbordingModel {
     );
   }
 }
-
-//  {
-//     "id": 1,
-//     "title": "Welcome to MyApp",
-//     "subtitle": "Discover amazing features to make your life easier, save time, and stay organized like never before. MyApp brings innovation and simplicity to your fingertips.",
-//     "image": "https://blogimage.vantagecircle.com/content/images/2020/08/Employee-Onboarding.png"
-//   },

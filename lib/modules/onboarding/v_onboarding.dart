@@ -121,55 +121,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
               },
             ),
           ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 18),
-          //   child: SizedBox(
-          //     width: Get.width,
-          //     height: 500,
-          //     child: Column(
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: [
-          //         ImageWidget(
-          //           imageKey: ValueKey(currentData.image),
-          //           image: currentData.image,
-          //         ),
-          //         const SizedBox(height: 30),
-          //         TitleWidget(
-          //           titleKey: ValueKey(currentData.title),
-          //           title: currentData.title,
-          //         ),
-          //         const SizedBox(height: 20),
-          //         DescriptionWidget(
-          //           descriptionKey: ValueKey(currentData.subtitle),
-          //           description: currentData.subtitle,
-          //         ),
-          //         const SizedBox(height: 30),
-          //         if (_currentIndex ==
-          //             dataController.onbordingList.value.length - 1)
-          //           GestureDetector(
-          //             onTap: () {},
-          //             child: Container(
-          //               decoration: BoxDecoration(
-          //                 color: const Color(0XFF2F7EF0),
-          //                 borderRadius: BorderRadius.circular(15),
-          //               ),
-          //               padding: const EdgeInsets.symmetric(
-          //                   vertical: 8, horizontal: 100),
-          //               child: const Text(
-          //                 "Get Started",
-          //                 style: TextStyle(
-          //                   fontSize: 14,
-          //                   color: Colors.white,
-          //                   fontWeight: FontWeight.w400,
-          //                 ),
-          //               ),
-          //             ),
-          //           ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          // const Spacer(),
           Row(
             children: [
               CustomButton(
