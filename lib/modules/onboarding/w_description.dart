@@ -10,16 +10,13 @@ class DescriptionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 300),
-      child: SizedBox(
+      child: Text(
         key: descriptionKey,
-        height: 50,
-        child: Center(
-          child: Text(
-            description,
-            style: const TextStyle(fontSize: 16, color: Colors.grey),
-            textAlign: TextAlign.center,
-          ),
-        ),
+        description,
+        maxLines: 4,
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(fontSize: 16, color: Colors.grey),
+        textAlign: TextAlign.center,
       ),
     );
   }

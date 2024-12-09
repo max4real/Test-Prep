@@ -20,7 +20,7 @@ class HomeController extends GetxController {
   }
 
   void initLoad() {
-    dataController.saveState(isFirstTime: false);
+    // dataController.saveState(isFirstTime: false);
     fetchUserData();
   }
 

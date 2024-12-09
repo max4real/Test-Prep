@@ -23,16 +23,13 @@ class TitleWidget extends StatelessWidget {
           ),
         );
       },
-      child: SizedBox(
+      child: Text(
         key: titleKey,
-        height: 30,
-        child: Center(
-          child: Text(
-            title,
-            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            textAlign: TextAlign.center,
-          ),
-        ),
+        title,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        textAlign: TextAlign.center,
       ),
     );
   }

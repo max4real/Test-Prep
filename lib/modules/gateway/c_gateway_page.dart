@@ -13,12 +13,6 @@ class GatewayController extends GetxController {
     initLoad();
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
   Future<void> initLoad() async {
     bool sfState = await dataController.getState();
     await Future.delayed(const Duration(seconds: 1));
@@ -27,7 +21,7 @@ class GatewayController extends GetxController {
       await dataController.fetchOnboradingData();
       await Future.delayed(const Duration(seconds: 1));
 
-      Get.offAll(() => const OnboardingPage());
+      Get.offAll(() => OnboardingPage());
     } else {
       //go to home
       Get.offAll(() => const HomePage());
