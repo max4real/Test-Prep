@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:test_prep/models/m_user_model.dart';
+import 'package:test_prep/modules/home/m/m_user_model.dart';
+import 'package:test_prep/modules/home/w/w_labled_icon.dart';
 
 class UserCard extends StatelessWidget {
   final VoidCallback onPress;
@@ -32,7 +33,7 @@ class UserCard extends StatelessWidget {
           backgroundColor:
               const Color.fromARGB(255, 85, 94, 228).withOpacity(0.5),
           child: Text(
-            user.name[0],
+            user.name[0].toUpperCase(),
             style: const TextStyle(fontSize: 20),
           ),
         ),
@@ -71,41 +72,15 @@ class UserCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildDetailRow(icon: Icons.email, text: user.email),
-        _buildDetailRow(
+        LabledIconWidget(icon: Icons.email, text: user.email),
+        LabledIconWidget(
           icon: Icons.home,
           text:
               "${user.address.suite}, ${user.address.street}, ${user.address.city}",
           maxLines: 3,
         ),
-        _buildDetailRow(icon: Icons.phone, text: user.phone),
-        _buildDetailRow(icon: Icons.business_outlined, text: user.company),
-      ],
-    );
-  }
-
-  Widget _buildDetailRow({
-    required IconData icon,
-    required String text,
-    int maxLines = 1,
-  }) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Icon(icon, size: 15),
-        const Gap(10),
-        Expanded(
-          child: Text(
-            text,
-            maxLines: maxLines,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ),
+        LabledIconWidget(icon: Icons.phone, text: user.phone),
+        LabledIconWidget(icon: Icons.business_outlined, text: user.company),
       ],
     );
   }

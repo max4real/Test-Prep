@@ -1,57 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test_prep/_common/data/data_controller.dart';
-import 'package:test_prep/modules/onboarding/w_custom_button.dart';
-import 'package:test_prep/modules/onboarding/w_description.dart';
-import 'package:test_prep/modules/onboarding/w_image.dart';
-import 'package:test_prep/modules/onboarding/w_title.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:test_prep/modules/home/v/v_home.dart';
 
-import '../home/v_home.dart';
+import 'package:test_prep/modules/onboarding/m/m_onbording_model.dart';
+import 'package:test_prep/modules/onboarding/w/w_custom_button.dart';
+import 'package:test_prep/modules/onboarding/w/w_description.dart';
+import 'package:test_prep/modules/onboarding/w/w_image.dart';
+import 'package:test_prep/modules/onboarding/w/w_title.dart';
+import 'package:test_prep/modules/shared/services/shared_preferance_service.dart';
 
 class OnboardingPage extends StatefulWidget {
-  const OnboardingPage({super.key});
+  const OnboardingPage({super.key, required this.onBoardingList});
+  final List<OnbordingModel> onBoardingList;
 
   @override
   State<OnboardingPage> createState() => _OnboardingPageState();
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
-  DataController dataController = Get.find();
   final PageController _pageController = PageController();
   int _currentIndex = 0;
   final double _dotSize = 10;
-
-  void _nextPage() {
-    setState(() {
-      if (_currentIndex != dataController.onbordingList.value.length - 1) {
-        _currentIndex++;
-        _swipePage();
-      }
-    });
-  }
-
-  void _previousPage() {
-    setState(() {
-      if (_currentIndex > 0) {
-        _currentIndex--;
-        _swipePage();
-      }
-    });
-  }
-
   void _movePage(int index) {
-    setState(() {
-      _currentIndex = index;
-      _swipePage();
-    });
-  }
-
-  void _swipePage() {
     _pageController.animateToPage(
-      _currentIndex,
+      index,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -68,9 +50,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   _currentIndex = index;
                 });
               },
-              itemCount: dataController.onbordingList.value.length,
+              itemCount: widget.onBoardingList.length,
               itemBuilder: (context, index) {
-                final currentData = dataController.onbordingList.value[index];
+                final currentData = widget.onBoardingList[index];
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 18),
                   child: Column(
@@ -91,11 +73,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         description: currentData.subtitle,
                       ),
                       const SizedBox(height: 30),
-                      if (index ==
-                          dataController.onbordingList.value.length - 1)
+                      if (index == widget.onBoardingList.length - 1)
                         GestureDetector(
                           onTap: () {
                             // Handle "Get Started" action
+                            SharedPreferanceService.saveState(
+                                isFirstTime: false);
                             Get.offAll(() => const HomePage());
                           },
                           child: Container(
@@ -125,7 +108,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             children: [
               CustomButton(
                 onPressed: () {
-                  _previousPage();
+                  _movePage(_currentIndex - 1);
                 },
                 icon: Icons.arrow_back,
                 offset: _currentIndex > 0 ? Offset.zero : const Offset(-0.5, 0),
@@ -134,15 +117,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
               const Spacer(),
               CustomButton(
                 onPressed: () {
-                  _nextPage();
+                  _movePage(_currentIndex + 1);
                 },
                 icon: Icons.arrow_forward,
-                offset: _currentIndex !=
-                        dataController.onbordingList.value.length - 1
+                offset: _currentIndex != widget.onBoardingList.length - 1
                     ? Offset.zero
                     : const Offset(0.5, 0),
-                opacity: _currentIndex !=
-                        dataController.onbordingList.value.length - 1
+                opacity: _currentIndex != widget.onBoardingList.length - 1
                     ? 1.0
                     : 0.0,
               ),
@@ -150,14 +131,14 @@ class _OnboardingPageState extends State<OnboardingPage> {
           ),
           const SizedBox(height: 20),
           SizedBox(
-            width: _dotSize * dataController.onbordingList.value.length * 2,
+            width: _dotSize * widget.onBoardingList.length * 2,
             child: Stack(
               alignment: Alignment.center,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
-                    dataController.onbordingList.value.length,
+                    widget.onBoardingList.length,
                     (index) {
                       return GestureDetector(
                         onTap: () {
