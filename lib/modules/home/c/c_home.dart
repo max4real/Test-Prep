@@ -1,16 +1,14 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test_prep/models/m_user_model.dart';
+import 'package:test_prep/modules/home/m/m_user_model.dart';
+import 'package:test_prep/modules/shared/widgets/w_custom_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../_common/data/data_controller.dart';
-import '../../_services/api_endpoint.dart';
+import '../../shared/constants/api_endpoint.dart';
 
 class HomeController extends GetxController {
-  DataController dataController = Get.find();
-  ValueNotifier<List<UserModel>> userList = ValueNotifier([]);
-  ValueNotifier<bool> xFetching = ValueNotifier(true);
+  List<UserModel> userList = [];
+  bool xFetching = true;
 
   @override
   void onInit() {
@@ -27,10 +25,11 @@ class HomeController extends GetxController {
   Future<void> fetchUserData() async {
     String url = ApiEndPoint.usersURL;
 
-    xFetching.value = true;
+    xFetching = true;
+    update();
     GetConnect client = GetConnect(timeout: const Duration(seconds: 30));
     final response = await client.get(url);
-    xFetching.value = false;
+    xFetching = false;
     if (response.isOk) {
       List<UserModel> temp = [];
       Iterable iterable = response.body;
@@ -38,10 +37,12 @@ class HomeController extends GetxController {
         UserModel rawData = UserModel.fromAPI(data: element);
         temp.add(rawData);
       }
-      userList.value = [...temp];
+      userList = temp;
     } else {
-      mySuccessDialog("Something Went Wrong!", false, Colors.redAccent);
+      showCustomDialog(
+          message: "Something Went Wrong!", color: Colors.redAccent);
     }
+    update();
   }
 
   Future<void> goToUrl(String url) async {

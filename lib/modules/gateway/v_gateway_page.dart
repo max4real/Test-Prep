@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:test_prep/_services/c_theme.dart';
+import 'package:test_prep/modules/shared/constants/c_theme.dart';
 import 'package:test_prep/modules/gateway/c_gateway_page.dart';
 
-class GatewayPage extends StatelessWidget {
+class GatewayPage extends StatefulWidget {
   const GatewayPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  State<GatewayPage> createState() => _GatewayPageState();
+}
+
+class _GatewayPageState extends State<GatewayPage> {
+  @override
+  void initState() {
     Get.put(GatewayController());
-    ThemeController themeController = Get.find();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: themeController.onBackground,
+      backgroundColor: ThemeController.onBackground,
       body: Column(
         children: [
           Expanded(
@@ -29,7 +38,7 @@ class GatewayPage extends StatelessWidget {
               child: Text(
                 'Power by max4real',
                 style: TextStyle(
-                  color: themeController.background,
+                  color: ThemeController.background,
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
                 ),

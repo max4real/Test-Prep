@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:test_prep/modules/gateway/v_gateway_page.dart';
-
-import '_common/data/data_controller.dart';
-import '_services/c_theme.dart';
+import 'package:test_prep/modules/shared/services/sp_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +20,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    injectDependencies();
+    changeAppState();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Test Prep',
@@ -36,8 +34,8 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  void injectDependencies() {
-    Get.put(DataController());
-    Get.put(ThemeController());
+  void changeAppState() {
+    //chnage this to switch between First time user or otherwise
+    SpService.saveState(isFirstTime: true);
   }
 }

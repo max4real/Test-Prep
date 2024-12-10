@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:test_prep/models/m_user_model.dart';
+import 'package:test_prep/modules/home/m/m_user_model.dart';
 
 class UserCard extends StatelessWidget {
   final VoidCallback onPress;
