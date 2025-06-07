@@ -19,7 +19,7 @@ class GatewayController extends GetxController {
   Future<void> initLoad() async {
     bool sfState = await SpService.getState();
     await Future.delayed(const Duration(seconds: 1));
-    if (sfState == true) {
+    if (sfState) {
       //go to onbording
       final list = await fetchOnboradingData();
 
